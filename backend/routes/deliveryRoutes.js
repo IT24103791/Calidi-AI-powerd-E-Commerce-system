@@ -4,7 +4,7 @@ const { protect } = require("../middleware/auth");
 const Delivery = require("../models/Delivery");
 const Order = require("../models/Order");
 
-// GET /api/deliveries - Get user's deliveries
+
 router.get("/", protect, async (req, res) => {
   try {
     const deliveries = await Delivery.find({ userId: req.user.uid }).sort({
@@ -16,7 +16,7 @@ router.get("/", protect, async (req, res) => {
   }
 });
 
-// GET /api/deliveries/:deliveryId - Get single delivery
+
 router.get("/:deliveryId", protect, async (req, res) => {
   try {
     const delivery = await Delivery.findOne({
@@ -32,7 +32,7 @@ router.get("/:deliveryId", protect, async (req, res) => {
   }
 });
 
-// GET /api/deliveries/order/:orderId - Get delivery by order ID
+
 router.get("/order/:orderId", protect, async (req, res) => {
   try {
     const delivery = await Delivery.findOne({ orderId: req.params.orderId });
@@ -46,13 +46,13 @@ router.get("/order/:orderId", protect, async (req, res) => {
   }
 });
 
-// GET /api/deliveries/methods/available - Get delivery methods with fees
+
 router.get("/methods/available", async (req, res) => {
   const city = (req.query.city || "").toLowerCase();
 
-  // Cities with same-day delivery available
+  
   const sameDayCities = ["colombo", "dehiwala", "moratuwa", "negombo", "kandy"];
-  // Cities with express delivery
+ 
   const expressCities = [
     ...sameDayCities,
     "galle", "matara", "jaffna", "batticaloa", "trincomalee",
